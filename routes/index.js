@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const userRoutes = require('./api/user-routes');
 const postRoutes = require('./api/post-routes');
+const vote = require('./api/vote');
 
 router.use('/users', userRoutes);
 router.use('/posts', postRoutes);
@@ -89,6 +90,34 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+User.belongsToMany(Post, {
+  through: Vote,
+  as: 'voted_posts',
+  foreignKey: 'user_id'
+});
+
+Post.belongsToMany(User, {
+  through: Vote,
+  as: 'voted_posts',
+  foreignKey: 'post_id'
+});
+
+Vote.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+Vote.belongsTo(Post, {
+  foreignKey: 'post_id'
+});
+
+User.hasMany(Vote, {
+  foreignKey: 'user_id'
+});
+
+Post.hasMany(Vote, {
+  foreignKey: 'post_id'
+});
+
 //const apiRoutes = require('./api/user-routes');
 
 //router.use('/api', apiRoutes);
@@ -97,4 +126,4 @@ router.delete('/:id', (req, res) => {
 //  res.status(404).end();
 //});
 
-module.exports = router;
+module.exports = { User, Post, Vote };
