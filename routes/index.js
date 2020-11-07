@@ -3,9 +3,13 @@ const router = require('express').Router();
 const userRoutes = require('./api/user-routes');
 const postRoutes = require('./api/post-routes');
 const vote = require('./api/vote');
+const commentRoutes = require('./comment-routes');
+
+router.use('/comments', commentRoutes);
 
 router.use('/users', userRoutes);
 router.use('/posts', postRoutes);
+
 
 router.get('/:id', (req, res) => {
   Post.findOne({
