@@ -3,12 +3,7 @@
 {{#if loggedIn}}
 <form class="comment-form">
   <div>
-    <textarea name="comment-body"></textarea>
-  </div>
-
-  <div>
-    <button type="submit">add comment</button>
-    <button type="button" class="upvote-btn">upvote</button>
+    {{> comments post.comments}}
   </div>
 </form>
 {{/if}}
