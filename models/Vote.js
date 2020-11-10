@@ -8,12 +8,10 @@ Vote.init(
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false,
       autoIncrement: true
     },
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: 'user',
         key: 'id'
@@ -21,7 +19,6 @@ Vote.init(
     },
     post_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: 'post',
         key: 'id'
@@ -38,3 +35,4 @@ Vote.init(
 );
 
 module.exports = Vote;
+
